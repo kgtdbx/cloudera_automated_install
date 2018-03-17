@@ -1,0 +1,11 @@
+{
+  "items" : [ {
+    "name" : "CLUSTER_STATS_START",
+    "value" : "10/22/2012 4:50",
+    "sensitive" : false
+  }, {
+    "name" : "REMOTE_PARCEL_REPO_URLS",
+    "value" : "http://192.168.56.101/repo/cloudera/parcels/el7/",
+    "sensitive" : false
+  } ]
+}
