@@ -1,0 +1,89 @@
+{
+  "cdhVersion" : "5.14.0",
+  "displayName" : "test",
+  "cmVersion" : "5.14.0",
+  "repositories" : [ "http://192.168.56.101/repo/cloudera/parcels/el7/" ],
+  "products" : [ {
+    "version" : "5.14.0-1.cdh5.14.0.p0.24",
+    "product" : "CDH"
+  } ],
+  "services" : [ {
+    "refName" : "zookeeper",
+    "serviceType" : "ZOOKEEPER",
+    "roleConfigGroups" : [ {
+      "refName" : "zookeeper-SERVER-BASE",
+      "roleType" : "SERVER",
+      "base" : true
+    } ]
+  }, {
+    "refName" : "hdfs",
+    "serviceType" : "HDFS",
+    "roleConfigGroups" : [ {
+      "refName" : "hdfs-DATANODE-BASE",
+      "roleType" : "DATANODE",
+      "base" : true
+    }, {
+      "refName" : "hdfs-NAMENODE-BASE",
+      "roleType" : "NAMENODE",
+      "base" : true
+    }, {
+      "refName" : "hdfs-BALANCER-BASE",
+      "roleType" : "BALANCER",
+      "base" : true
+    }, {
+      "refName" : "hdfs-SECONDARYNAMENODE-BASE",
+      "roleType" : "SECONDARYNAMENODE",
+      "base" : true
+    }, {
+      "refName" : "hdfs-DATANODE-1",
+      "roleType" : "DATANODE",
+      "base" : false
+    } ]
+  }, {
+    "refName" : "yarn",
+    "serviceType" : "YARN",
+    "roleConfigGroups" : [ {
+      "refName" : "yarn-NODEMANAGER-1",
+      "roleType" : "NODEMANAGER",
+      "base" : false
+    }, {
+      "refName" : "yarn-RESOURCEMANAGER-BASE",
+      "roleType" : "RESOURCEMANAGER",
+      "base" : true
+    }, {
+      "refName" : "yarn-JOBHISTORY-BASE",
+      "roleType" : "JOBHISTORY",
+      "base" : true
+    }, {
+      "refName" : "yarn-NODEMANAGER-BASE",
+      "roleType" : "NODEMANAGER",
+      "base" : true
+    } ]
+  } ],
+  "hostTemplates" : [ {
+    "refName" : "HostTemplate-0-from-node3.example.com",
+    "cardinality" : 1,
+    "roleConfigGroupsRefNames" : [ "hdfs-DATANODE-1", "yarn-NODEMANAGER-1" ]
+  }, {
+    "refName" : "HostTemplate-1-from-node2.example.com",
+    "cardinality" : 1,
+    "roleConfigGroupsRefNames" : [ "hdfs-BALANCER-BASE", "hdfs-DATANODE-BASE", "hdfs-NAMENODE-BASE", "hdfs-SECONDARYNAMENODE-BASE", "yarn-JOBHISTORY-BASE", "yarn-NODEMANAGER-BASE", "yarn-RESOURCEMANAGER-BASE", "zookeeper-SERVER-BASE" ]
+  } ],
+  "instantiator" : {
+    "clusterName" : "<changeme>",
+    "hosts" : [ {
+      "hostName" : "<changeme>",
+      "hostTemplateRefName" : "<changeme>"
+    }, {
+      "hostNameRange" : "<HOST[0001-0002]>",
+      "hostTemplateRefName" : "<changeme>"
+    } ],
+    "roleConfigGroups" : [ {
+      "rcgRefName" : "hdfs-DATANODE-1",
+      "name" : ""
+    }, {
+      "rcgRefName" : "yarn-NODEMANAGER-1",
+      "name" : ""
+    } ]
+  }
+}
