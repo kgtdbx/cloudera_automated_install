@@ -1,0 +1,80 @@
+{
+  "cdhVersion" : "5.14.0",
+  "displayName" : "demo",
+  "cmVersion" : "5.14.0",
+  "repositories" : [ "http://10.0.1.206/repo/cdh/parcels/centos7/" ],
+  "products" : [ {
+    "version" : "5.14.0-1.cdh5.14.0.p0.24",
+    "product" : "CDH"
+  }],
+  "services" : [ {
+          "refName" : "zookeeper",
+            "serviceType" : "ZOOKEEPER",
+            "roleConfigGroups" : [ {
+              "refName" : "ZOOKEEPER_SERVER",
+              "roleType" : "SERVER",
+              "base" : true
+            } ]
+}, {
+"refName" : "hdfs",
+             "serviceType" : "HDFS",
+             "roleConfigGroups" : [ {
+             "refName" : "DATANODE",
+             "roleType" : "DATANODE",
+             "base" : true
+}, {
+             "refName" : "NAMENODE",
+             "roleType" : "NAMENODE",
+             "base" : true
+}, {
+             "refName" : "hdfs",
+             "roleType" : "SECONDARY_NAMENODE",
+             "base" : true
+} ]
+}, {
+"refName" : "yarn",
+             "serviceType" : "YARN",
+             "roleConfigGroups" : [ {
+             "refName" : "NODEMANAGER",
+             "roleType" : "NODEMANAGER",
+             "base" : false
+}, {
+             "refName" : "RESOURCEMANAGER",
+             "roleType" : "RESOURCEMANAGER",
+             "base" : true
+}, {
+             "refName" : "HISTORYSERVER",
+             "roleType" : "HISTORYSERVER",
+             "base" : true
+} ]
+
+
+  "hostTemplates" : [ {
+"refName" : "HostTemplate-1-from-HOST1=ip-10-0-1-141.ec2.internal",
+    "cardinality" : 1,
+"roleConfigGroupsRefNames" : [ "NAMENODE", "NODEMANAGER", "DATANODE",     "ZOOKEEPER_SERVER", "SECONDARY_NAMENODE", "RESOURCEMANAGER", "APP_TIMELINE_SERVER", "HISTORYSERVER" ]
+}, {
+"refName" : "HostTemplate-1-from-HOST2=ip-10-0-1-142.ec2.internal",
+    "cardinality" : 1,
+"roleConfigGroupsRefNames" : [ "DATANODE", "NODEMANAGER",  ]
+}, {
+"refName" : "HostTemplate-1-from-HOST3=ip-10-0-1-143.ec2.internal",
+    "cardinality" : 1,
+"roleConfigGroupsRefNames" : [ "DATANODE", "NODEMANAGER",  ]
+  } ],
+
+
+"instantiator" : {
+    "clusterName" : "hdptest",
+    "hosts" : [ {
+"hostName" : "ip-10-0-1-141.ec2.internal",
+      "hostTemplateRefName" : "HostTemplate-1-from-ip-10-0-1-141.ec2.internal"
+    }, {
+"hostName" : "ip-10-0-1-142.ec2.internal",
+      "hostTemplateRefName" : "HostTemplate-1-from-ip-10-0-1-142.ec2.internal"
+    }, {
+"hostNameRange" : "ip-10-0-1-143.ec2.internal",
+      "hostTemplateRefName" : "HostTemplate-0-from-ip-10-0-1-143.ec2.internal"
+    } ]
+  }
+}

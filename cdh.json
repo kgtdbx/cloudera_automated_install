@@ -1,12 +1,7 @@
 {
   "cdhVersion" : "5.14.0",
-  "displayName" : "demo",
+  "displayName" : "test",
   "cmVersion" : "5.14.0",
-  "repositories" : [ "http://192.168.56.101/repo/cloudera/parcels/el7/" ],
-  "products" : [ {
-    "version" : "5.14.0-1.cdh5.14.0.p0.24",
-    "product" : "CDH"
-  } ],
   "services" : [ {
     "refName" : "zookeeper",
     "serviceType" : "ZOOKEEPER",
@@ -53,16 +48,18 @@
     } ]
   } ],
   "hostTemplates" : [ {
-    "refName" : "HostTemplate-0-from-node.example.com",
+    "refName" : "HostTemplate-0-from-node2.example.com",
     "cardinality" : 1,
     "roleConfigGroupsRefNames" : [ "hdfs-BALANCER-BASE", "hdfs-DATANODE-BASE", "hdfs-NAMENODE-BASE", "hdfs-SECONDARYNAMENODE-BASE", "yarn-JOBHISTORY-BASE", "yarn-NODEMANAGER-BASE", "yarn-RESOURCEMANAGER-BASE", "zookeeper-SERVER-BASE" ]
   } ],
   "instantiator" : {
-    "clusterName" : "demo",
+    "clusterName" : "<changeme>",
     "hosts" : [ {
-      "hostName" : "node2.example.com",
-      "hostTemplateRefName" : "HostTemplate-0-from-node.example.com"
-    }
-    ]
+      "hostName" : "<changeme>",
+      "hostTemplateRefName" : "<changeme>"
+    }, {
+      "hostNameRange" : "<HOST[0001-0002]>",
+      "hostTemplateRefName" : "<changeme>"
+    } ]
   }
 }
