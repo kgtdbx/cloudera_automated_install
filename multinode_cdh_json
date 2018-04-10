@@ -73,7 +73,7 @@
 
 
   "hostTemplates" : [ {
-    "refName" : "HostTemplate-0-from-node3.example.com",
+    "refName" : "HostTemplate-1-from-node3.example.com",
     "cardinality" : 1,
     "roleConfigGroupsRefNames" : [ "hdfs-DATANODE-BASE", "yarn-NODEMANAGER-1" ]
   }, {
@@ -82,15 +82,11 @@
     "roleConfigGroupsRefNames" : [ "hdfs-BALANCER-BASE", "hdfs-DATANODE-1", "hdfs-NAMENODE-BASE", "hdfs-SECONDARYNAMENODE-BASE", "yarn-JOBHISTORY-BASE", "yarn-NODEMANAGER-BASE", "yarn-RESOURCEMANAGER-BASE", "zookeeper-SERVER-BASE" ]
   } ],
 
-
-
-
-
   "instantiator" : {
     "clusterName" : "demo",
     "hosts" : [ {
       "hostName" : "node2.example.com",
-      "hostTemplateRefName" : "HostTemplate-1-from-node2.example.com"
+      "hostTemplateRefName" : "HostTemplate-0-from-node2.example.com"
     }, {
       "hostNameRange" : "node3.example.com",
       "hostTemplateRefName" : "HostTemplate-0-from-node3.example.com"

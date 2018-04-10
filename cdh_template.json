@@ -88,7 +88,7 @@ do
 if [ "SECONDARY_NAMENODE" =  "$comp" ]
 then
           echo "}, {
-             \"refName\" : \"hdfs\",
+             \"refName\" : \"$comp\",
              \"roleType\" : \"$comp\",
              \"base\" : true" 
 fi
@@ -131,6 +131,7 @@ then
 fi
 done
              echo "} ]" 
+             echo "} ]," 
 #End of function
 }
 
@@ -144,9 +145,11 @@ echo "  \"hostTemplates\" : [ {"
 for HOST in `grep -w 'HOST[0-9]*' $LOC/$PROPS|tr '\n' ' '`
 do
    HST_NAME_VAR=`echo $HOST|cut -d'=' -f1`
-    echo "\"refName\" : \"HostTemplate-1-from-$HOST.$DOMAIN_NAME\",
+   HST_hostname=`echo $HOST|cut -d'=' -f2`
+    echo "\"refName\" : \"HostTemplate-1-from-$HST_hostname.$DOMAIN_NAME\",
     \"cardinality\" : 1,"
                 SVC=`grep $HST_NAME_VAR"_SERVICES" $LOC/$PROPS|cut -d'=' -f2 |sed 's/,/", "/g'|sed -e 's/[^ ]*CLIENT"[^ ]*//ig'`
+		SVC=`echo $SVC|sed 's/,$//'`
 		if [ "$HST_NAME_VAR" = "$LAST_HST_NAME" ]
 		then
     			echo "\"roleConfigGroupsRefNames\" : [ $SVC ]"
@@ -171,14 +174,22 @@ for HOST in `cat list`
 do
 
       echo "\"hostName\" : \"$HOST.$DOMAIN_NAME\",
-      \"hostTemplateRefName\" : \"HostTemplate-1-from-$HOST.$DOMAIN_NAME\"
+      \"hostTemplateRefName\" : \"HostTemplate-0-from-$HOST.$DOMAIN_NAME\"
     }, {"
 done
       echo "\"hostNameRange\" : \"$LAST_HOST.$DOMAIN_NAME\",
-      \"hostTemplateRefName\" : \"HostTemplate-0-from-$LAST_HOST.$DOMAIN_NAME\"
+      \"hostTemplateRefName\" : \"HostTemplate-1-from-$LAST_HOST.$DOMAIN_NAME\"
+    } ],
+    "roleConfigGroups" : [ {
+      "rcgRefName" : "DATANODE-1",
+      "name" : ""
+    }, {
+      "rcgRefName" : "NODEMANAGER-1",
+      "name" : ""
     } ]
   }
 }"
+
 #End of function
 }
 
