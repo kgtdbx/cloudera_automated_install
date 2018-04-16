@@ -46,14 +46,12 @@ PUBLIC_IP=192.168.56.112
 HOST2=node3
 IP2=192.168.56.113
 
-
-
 #######################  EDIT BELOW INFORMATION ONLY IF YOU KNOW WHAT YOU ARE DOING!! :)  #######################
 
 #Define your repository server EG. LOCAL or INTERNET. Make sure you should either use Local Repo server or Public to download packages
 #Comment unwanted entry below -
 #Repository server ipaddress
-REPO_SERVER=10.0.1.206
+REPO_SERVER=192.168.56.101
 # To download packages from Internet
 #REPO_SERVER=public
 
@@ -62,7 +60,6 @@ REPO_SERVER=10.0.1.206
 #Make sure you can modify below section properly making sure all services dependencies are defined properly, else cluster installation with FAIL.
 HOST1_SERVICES="NAMENODE,NODEMANAGER,DATANODE,ZOOKEEPER_CLIENT,HDFS_CLIENT,YARN_CLIENT,MAPREDUCE2_CLIENT,ZOOKEEPER_SERVER,SECONDARY_NAMENODE,RESOURCEMANAGER,HISTORYSERVER"
 HOST2_SERVICES="DATANODE,NODEMANAGER,ZOOKEEPER_CLIENT"
-HOST3_SERVICES="DATANODE,NODEMANAGER,ZOOKEEPER_CLIENT"
 
 
 

@@ -15,6 +15,9 @@ Steps:
 	Modify file - 
 	$curl -X PUT -H "Content-Type:application/json" -u admin:admin -X PUT --data @/tmp/repo.json http://192.168.56.112:7180/api/v19/cm/config
 
+#Export existing cluster template using below command -
+$curl -u adminuser:adminpass "http://myCluster-1.myDomain.com:7180/api/v12/clusters/Cluster1/export
+
 curl -X POST -H "Content-Type: application/json" -d @cdh.json  http://admin:admin@node2.example.com:7180/api/v12/cm/importClusterTemplate
 
 curl -X POST -H "Content-Type: application/json" http://admin:admin@192.168.56.112:7180/api/v19/clusters/demo/parcels/products/CDH/versions/5.14.0-1.cdh5.14.0.p0.24/commands/startDownload

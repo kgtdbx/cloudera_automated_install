@@ -8,11 +8,19 @@
     "product" : "CDH"
   } ],
   "services" : [ {
-    "refName" : "zookeeper",
-    "serviceType" : "ZOOKEEPER",
+    "refName" : "yarn",
+    "serviceType" : "YARN",
     "roleConfigGroups" : [ {
-      "refName" : "zookeeper-SERVER-BASE",
-      "roleType" : "SERVER",
+      "refName" : "yarn-RESOURCEMANAGER-BASE",
+      "roleType" : "RESOURCEMANAGER",
+      "base" : true
+    }, {
+      "refName" : "yarn-JOBHISTORY-BASE",
+      "roleType" : "JOBHISTORY",
+      "base" : true
+    }, {
+      "refName" : "yarn-NODEMANAGER-BASE",
+      "roleType" : "NODEMANAGER",
       "base" : true
     } ]
   }, {
@@ -40,34 +48,26 @@
       "base" : false
     } ]
   }, {
-    "refName" : "yarn",
-    "serviceType" : "YARN",
+    "refName" : "zookeeper",
+    "serviceType" : "ZOOKEEPER",
     "roleConfigGroups" : [ {
-      "refName" : "yarn-NODEMANAGER-1",
-      "roleType" : "NODEMANAGER",
-      "base" : false
-    }, {
-      "refName" : "yarn-RESOURCEMANAGER-BASE",
-      "roleType" : "RESOURCEMANAGER",
-      "base" : true
-    }, {
-      "refName" : "yarn-JOBHISTORY-BASE",
-      "roleType" : "JOBHISTORY",
-      "base" : true
-    }, {
-      "refName" : "yarn-NODEMANAGER-BASE",
-      "roleType" : "NODEMANAGER",
+      "refName" : "zookeeper-SERVER-BASE",
+      "roleType" : "SERVER",
       "base" : true
     } ]
   } ],
   "hostTemplates" : [ {
-    "refName" : "HostTemplate-0-from-node3.example.com",
+    "refName" : "HostTemplate-0-from-node2.example.com",
     "cardinality" : 1,
-    "roleConfigGroupsRefNames" : [ "hdfs-DATANODE-1", "yarn-NODEMANAGER-1" ]
+    "roleConfigGroupsRefNames" : [ "hdfs-BALANCER-BASE", "hdfs-NAMENODE-BASE", "hdfs-SECONDARYNAMENODE-BASE", "yarn-JOBHISTORY-BASE", "yarn-RESOURCEMANAGER-BASE", "zookeeper-SERVER-BASE" ]
   }, {
-    "refName" : "HostTemplate-1-from-node2.example.com",
+    "refName" : "HostTemplate-1-from-node1.example.com",
     "cardinality" : 1,
-    "roleConfigGroupsRefNames" : [ "hdfs-BALANCER-BASE", "hdfs-DATANODE-BASE", "hdfs-NAMENODE-BASE", "hdfs-SECONDARYNAMENODE-BASE", "yarn-JOBHISTORY-BASE", "yarn-NODEMANAGER-BASE", "yarn-RESOURCEMANAGER-BASE", "zookeeper-SERVER-BASE" ]
+    "roleConfigGroupsRefNames" : [ "hdfs-DATANODE-BASE", "yarn-NODEMANAGER-BASE", "zookeeper-SERVER-BASE" ]
+  }, {
+    "refName" : "HostTemplate-2-from-node3.example.com",
+    "cardinality" : 1,
+    "roleConfigGroupsRefNames" : [ "hdfs-DATANODE-1", "yarn-NODEMANAGER-BASE", "zookeeper-SERVER-BASE" ]
   } ],
   "instantiator" : {
     "clusterName" : "<changeme>",
@@ -80,9 +80,6 @@
     } ],
     "roleConfigGroups" : [ {
       "rcgRefName" : "hdfs-DATANODE-1",
-      "name" : ""
-    }, {
-      "rcgRefName" : "yarn-NODEMANAGER-1",
       "name" : ""
     } ]
   }
